@@ -1,0 +1,20 @@
+package templates;
+
+import "sblog/utils"
+
+import m "sblog/models"
+
+templ PostCategories(categories []m.Category) {
+	<div class="flex mb-4">
+		if len(categories) == 0 {
+			This post has no categories
+		} else {
+			Categories:
+			<ul class="ml-2 flex space-x-2">
+				for _, category := range categories {
+					<li><a href={ utils.CategoryUrl(category, 1) }>{ category.Name }</a></li>
+				}
+			</ul>
+		}
+	</div>
+}
