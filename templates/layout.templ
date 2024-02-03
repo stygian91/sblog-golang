@@ -3,7 +3,7 @@ package templates
 import "fmt"
 import "sblog/config"
 
-templ Layout() {
+templ Layout(head templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -11,12 +11,13 @@ templ Layout() {
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<title>SBlog</title>
 			<link rel="stylesheet" href={ fmt.Sprintf("%s%s", config.UrlBase, "style.css") }/>
+			if head != nil {
+				@head
+			}
 		</head>
 		<body class="bg-black text-gray-100 text-lg">
 			<div class="w-full flex justify-around outline outline-1 outline-gray-900">
-				<div
-					class="w-full lg:w-4/6 flex justify-between px-4 lg:px-0 py-6 overflow-x-auto space-x-2"
-				>
+				<div class="w-full lg:w-4/6 flex justify-between px-4 lg:px-0 py-6 overflow-x-auto space-x-2">
 					<a class="text-3xl lg:text-4xl" href={ templ.URL(config.UrlBase) }>Sblog</a>
 					<div class="flex space-x-5 flex-row py-2 items-center">
 						<ul class="flex space-x-5">
