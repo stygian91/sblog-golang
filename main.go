@@ -10,7 +10,10 @@ import (
 )
 
 func main() {
-	config.Init()
+	err := config.Init()
+	if err != nil {
+		panic(err)
+	}
 
 	p := m.Post{
 		Title:     "lorem",
