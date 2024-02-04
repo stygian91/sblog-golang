@@ -33,18 +33,21 @@ func (this Post) Excerpt() string {
 	isPrevSpace := false
 
 	for _, ch := range this.Content {
-		if unicode.IsSpace(ch) {
-			if !isPrevSpace {
-				wordCount++
-				if wordCount == config.ExcerptSize {
-					return excerpt
-				}
-			}
-			isPrevSpace = true
-		} else {
+		if !unicode.IsSpace(ch) {
 			isPrevSpace = false
+			excerpt += string(ch)
+			continue
 		}
 
+		if !isPrevSpace {
+			wordCount++
+		}
+
+		if wordCount == config.ExcerptSize {
+			return excerpt
+		}
+
+		isPrevSpace = true
 		excerpt += string(ch)
 	}
 
