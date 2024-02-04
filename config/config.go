@@ -7,6 +7,7 @@ import (
 
 var (
 	UrlBase string
+	ExcerptSize = 30
 )
 
 func Init() error {
