@@ -3,7 +3,7 @@ package templates;
 import "sblog/utils"
 import m "sblog/models"
 
-templ PostSingle(post m.Post, categories []m.Category) {
+templ PostSingle(post m.Post, content string, categories []m.Category) {
 	@Layout(nil) {
 		<div class="mb-4">
 			<h1 class="text-4xl">{ post.Title }</h1>
@@ -14,8 +14,7 @@ templ PostSingle(post m.Post, categories []m.Category) {
 		@PostCategories(categories)
 
 		<div class="post-single">
-			<!-- TODO: markdown -->
-			{ post.Content }
+			@templ.Raw(content)
 
 			<div class="flex justify-center my-12">
 				<hr class="w-1/3"/>
