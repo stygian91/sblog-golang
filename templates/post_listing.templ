@@ -1,0 +1,22 @@
+package templates
+
+import "sblog/models"
+
+templ PostListing(posts [] models.Post) {
+	@Layout(nil) {
+		<div>
+			if len(posts) == 0 {
+				<div class="w-full text-center text-2xl">There are no posts yet.</div>
+			} else {
+				<div class="space-y-16">
+					for _, post := range posts {
+						@PostShort(post)
+					}
+				</div>
+			}
+		</div>
+
+		<!-- TODO: pagination -->
+	}
+}
+

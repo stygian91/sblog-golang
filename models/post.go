@@ -1,30 +1,23 @@
 package models
 
 import (
-	"bytes"
 	"sblog/config"
+	"sblog/utils/markdown"
 	"time"
 	"unicode"
-
-	mark "github.com/yuin/goldmark"
 )
 
 type Post struct {
-	Id        uint
-	Title     string
-	Content   string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Id         uint
+	Title      string
+	Content    string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
+	Categories []Category
 }
 
 func (this Post) ContentToHtml() (string, error) {
-	var buffer bytes.Buffer
-	err := mark.Convert([]byte(this.Content), &buffer)
-	if err != nil {
-		return "", err
-	}
-
-	return buffer.String(), nil
+	return markdown.ToString(this.Content)
 }
 
 func (this Post) Excerpt() string {
@@ -44,7 +37,7 @@ func (this Post) Excerpt() string {
 		}
 
 		if wordCount == config.ExcerptSize {
-			return excerpt
+			return excerpt + "..."
 		}
 
 		isPrevSpace = true
@@ -52,4 +45,8 @@ func (this Post) Excerpt() string {
 	}
 
 	return excerpt
+}
+
+func (this Post) ExcerptToHtml() (string, error) {
+	return markdown.ToString(this.Excerpt())
 }

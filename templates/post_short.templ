@@ -1,29 +1,22 @@
 package templates
 
 import "sblog/utils"
-
 import m "sblog/models"
 
 templ PostShort(post m.Post) {
 	<div class="flex flex-col">
 		<h2 class="text-4xl mb-2">
-			<!-- TODO: href -->
-			<a>{ post.Title }</a>
+			<a href={ utils.PostUrl(post) }>{ post.Title }</a>
 		</h2>
 		<div>Date: { utils.FormatTime(post.CreatedAt) }</div>
-		<!--
-		TODO:
-    {# @if ($post['categories'])
-        <x-post-categories :categories="$post['categories']" />
-    @endif #}
-		-->
+
+		@PostCategories(post.Categories)
+
 		<div class="post-single">
-			<!-- TODO: change to excerpt and markdown -->
-			{ post.Content }
+			@templ.Raw(post.ExcerptToHtml())
 		</div>
 		<div>
-			<!-- TODO: post link -->
-			<a class="underline">Read more</a>
+			<a href={ utils.PostUrl(post) } class="underline">Read more</a>
 		</div>
 		<div class="w-1/3 border-b border-white mt-6 self-center"></div>
 	</div>
