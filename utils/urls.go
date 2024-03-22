@@ -15,3 +15,6 @@ func CategoryUrl(category m.Category, page uint) templ.SafeURL {
 func PostUrl(post m.Post) templ.SafeURL {
 	return templ.URL(fmt.Sprintf("%spost/%d.html", config.UrlBase, post.Id))
 }
+func PageUrl(page uint64) templ.SafeURL {
+	return templ.URL(fmt.Sprintf("%spage/%d.html", config.UrlBase, page))
+}

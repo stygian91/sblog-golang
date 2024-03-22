@@ -36,7 +36,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := render.RenderListingPage([]m.Post{post, post}, 1); err != nil {
+	if err := render.RenderListingPage([]m.Post{post, post}, 5, 5); err != nil {
 		panic(err)
 	}
 }

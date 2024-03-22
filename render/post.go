@@ -44,12 +44,12 @@ func RenderSingle(post models.Post) error {
 	return renderToFile(dest, views.PostSingle(post))
 }
 
-func RenderListingPage(posts []models.Post, page uint) error {
+func RenderListingPage(posts []models.Post, page uint64, maxPages uint64) error {
 	dir, err := prepareOutSubdir("page")
 	if err != nil {
 		return err
 	}
 
 	dest := filepath.Join(dir, fmt.Sprintf("%d.html", page))
-	return renderToFile(dest, views.PostListing(posts))
+	return renderToFile(dest, views.PostListing(posts, page, maxPages))
 }

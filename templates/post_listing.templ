@@ -2,7 +2,7 @@ package templates
 
 import "sblog/models"
 
-templ PostListing(posts [] models.Post) {
+templ PostListing(posts [] models.Post, currentPage uint64, maxPages uint64) {
 	@Layout(nil) {
 		<div>
 			if len(posts) == 0 {
@@ -16,7 +16,7 @@ templ PostListing(posts [] models.Post) {
 			}
 		</div>
 
-		<!-- TODO: pagination -->
+		@PaginationSimple(currentPage, maxPages)
 	}
 }
 
